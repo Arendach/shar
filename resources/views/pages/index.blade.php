@@ -24,7 +24,7 @@
                     @foreach($category->products as $item)
                         <div class="product-cat">
                             <a href="{{ uri('product', ['id' => $item->id]) }}">
-                                <img src="{{ $item->photo }}" alt="">
+                                <img src="{{ $item->photo_min }}" alt="">
                             </a>
                             <h3 class="product-name">{{ $item->name }}</h3>
                             {!! $item->short !!}
@@ -38,7 +38,7 @@
                                                 'name' => $item->name,
                                                 'price' => $item->price,
                                                 'id' => $item->id,
-                                                'photo' => $item->photo
+                                                'photo' => $item->photo_min
                                                 ]) }}" class="btn btn-primary to_cart">В корзину
                                     </button>
                                 </div>
