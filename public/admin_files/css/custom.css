@@ -1,0 +1,116 @@
+.footer{
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    font-size: 12px;
+    padding: 12px;
+    margin: 0;
+}
+
+
+.action-1{
+    width: 55px;
+}
+
+.action-2{
+    width: 89px;
+}
+
+.pagination{
+    text-align: center;
+}
+
+table.table {
+    margin-bottom: 0;
+}
+
+ul.pagination {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.centered{
+    text-align: center;
+}
+.footer{
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    font-size: 12px;
+    padding: 12px;
+    margin: 0;
+}
+
+
+.action-1{
+    width: 55px;
+}
+
+.action-2{
+    width: 89px;
+}
+
+.pagination{
+    text-align: center;
+}
+
+table.table {
+    margin-bottom: 0;
+}
+
+ul.pagination {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.centered{
+    text-align: center;
+}
+
+#dropZone {
+    color: #555;
+    font-size: 22px;
+    text-align: center;
+
+    width: 100%;
+    padding: 100px 0;
+    margin: 0 auto;
+
+    background: #eee;
+    border: 5px dashed #ccc;
+
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+#dropZone.hover {
+    background: #ddd;
+    border-color: #aaa;
+}
+
+#dropZone.error {
+    background: #faa;
+    border-color: #f00;
+}
+
+#dropZone.drop {
+    background: #afa;
+    border-color: #0f0;
+}
+
+#dropZone input[type=file]{
+    display: none;
+}
+
+#dropZone a{
+    cursor: pointer
+}

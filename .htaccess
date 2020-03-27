@@ -1,0 +1,13 @@
+AddDefaultCharset utf-8
+
+RewriteEngine on
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+Options +FollowSymlinks
+RewriteBase /
+
+RewriteRule ^index\.php$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ public/$1 [L]

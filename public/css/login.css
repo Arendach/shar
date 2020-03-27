@@ -1,0 +1,20 @@
+.login-head{
+    font-size: 250%;
+    text-align:center;
+    color: rgb(193 193 187);
+}
+
+.login-block{
+    margin:  100px calc(25%);
+    background: rgb(243 243 243);
+    padding: 20px;
+    border: 2px dashed #ccc;
+}
+
+body{
+    background: #E3E7EB;
+}
+
+label{
+    color: rgb(207 206 204)
+}
