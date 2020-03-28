@@ -8,8 +8,8 @@
   and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
 */
 !function (a) {
-    if ("function" == typeof define && define.amd) define(["jquery"], a); else if ("object" == typeof exports) {
-        var b = require("jquery");
+    if ("function" == typeof define && define.amd) define(["resources/js/jquery"], a); else if ("object" == typeof exports) {
+        var b = require("resources/js/jquery");
         module.exports = a(b)
     } else a(window.jQuery || window.Zepto || window.$)
 }(function (a) {

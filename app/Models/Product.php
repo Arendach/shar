@@ -6,56 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-/**
- * App\Models\Product
- *
- * @property int $id
- * @property string|null $name
- * @property string|null $meta_description
- * @property string|null $meta_keywords
- * @property string|null $meta_title
- * @property float|null $price
- * @property int|null $category_id
- * @property string|null $photo
- * @property string|null $photo_min
- * @property string|null $photo_description
- * @property int|null $on_storage
- * @property string|null $short
- * @property string|null $description
- * @property int|null $public
- * @property int|null $archive
- * @property string|null $articul
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @method static bool|null forceDelete()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product newQuery()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Product onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product query()
- * @method static bool|null restore()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereArchive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereArticul($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereMetaDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereMetaKeywords($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereMetaTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereOnStorage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePhoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePhotoDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePhotoMin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product wherePublic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereShort($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Product whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Product withTrashed()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Product withoutTrashed()
- * @mixin \Eloquent
- * @property-read \App\Models\Category|null $category
- */
 class Product extends Model
 {
     protected $table = 'product';
@@ -81,6 +31,11 @@ class Product extends Model
     ];
 
     use SoftDeletes;
+
+    public function getUrlAttribute()
+    {
+        return route('product', $this->id);
+    }
 
     public static function get_products_to_index()
     {
@@ -158,19 +113,19 @@ class Product extends Model
     public static function create($post)
     {
         return DB::table('product')->insertGetId([
-            'name' => $post->name,
+            'name'             => $post->name,
             'meta_description' => '',
-            'meta_keywords' => '',
-            'meta_title' => '',
-            'price' => $post->price,
-            'articul' => $post->articul,
-            'category_id' => $post->category_id,
-            'photo' => '',
-            'on_storage' => '0',
-            'description' => $post->description,
-            'short' => $post->short,
-            'public' => 0,
-            'archive' => 0,
+            'meta_keywords'    => '',
+            'meta_title'       => '',
+            'price'            => $post->price,
+            'articul'          => $post->articul,
+            'category_id'      => $post->category_id,
+            'photo'            => '',
+            'on_storage'       => '0',
+            'description'      => $post->description,
+            'short'            => $post->short,
+            'public'           => 0,
+            'archive'          => 0,
         ]);
     }
 
@@ -179,10 +134,10 @@ class Product extends Model
         DB::table('product')
             ->where('id', $post->id)
             ->update([
-                'name' => $post->name,
-                'price' => $post->price,
-                'articul' => $post->articul,
-                'short' => $post->short,
+                'name'        => $post->name,
+                'price'       => $post->price,
+                'articul'     => $post->articul,
+                'short'       => $post->short,
                 'category_id' => $post->category_id,
                 'description' => $post->description
             ]);
@@ -194,10 +149,10 @@ class Product extends Model
             ->where('id', $post->id)
             ->update([
                 'meta_description' => $post->meta_description,
-                'meta_keywords' => $post->meta_keywords,
-                'meta_title' => $post->meta_title,
-                'on_storage' => $post->on_storage,
-                'public' => $post->public,
+                'meta_keywords'    => $post->meta_keywords,
+                'meta_title'       => $post->meta_title,
+                'on_storage'       => $post->on_storage,
+                'public'           => $post->public,
             ]);
     }
 
@@ -216,8 +171,8 @@ class Product extends Model
         DB::table('product')
             ->where('id', $post->id)
             ->update([
-                'photo' => $photo,
-                'photo_min' => $photo_min,
+                'photo'             => $photo,
+                'photo_min'         => $photo_min,
                 'photo_description' => $post->description
             ]);
     }
@@ -236,10 +191,10 @@ class Product extends Model
     {
         DB::table('product_images')
             ->insert([
-                'path_large' => $path,
-                'path_min' => $path_min,
+                'path_large'  => $path,
+                'path_min'    => $path_min,
                 'description' => $post->description,
-                'product_id' => $post->id
+                'product_id'  => $post->id
             ]);
     }
 
@@ -255,6 +210,11 @@ class Product extends Model
         if (is_file(public_path($value))) return asset($value);
         elseif (preg_match('/^http/', $value)) return $value;
         else return asset('images/no_photo.png');
+    }
+
+    public function getLazyAttribute()
+    {
+        return asset('images/balloons.jpg');
     }
 
     public function category()

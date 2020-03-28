@@ -7,28 +7,19 @@ use Gumlet\ImageResize;
 
 class ProductController extends Controller
 {
-    public function section_main()
+    public function show($id)
     {
-        // якщо немає ідентифікатора
-        abort_if(!get('id'), 404);
-
-        $product = Product::with('images')
-            ->with('category')
-            ->findOrFail(get('id'));
-
-        // якщо товар не опублікований
-        abort_if(!$product->public, 404);
+        $product = Product::with('images', 'category')->where('public', 1)->firstOrFail($id);
 
         $data = [
-            'title' => $product->meta_title,
+            'title'            => $product->meta_title,
             'meta_description' => $product->meta_description,
-            'meta_keywords' => $product->meta_keywords,
-            'breadcrumbs' => [
+            'meta_keywords'    => $product->meta_keywords,
+            'breadcrumbs'      => [
                 [$product->category->name, uri('category', ['id' => $product->category->id])],
                 [$product->name]
             ],
-            'product' => $product,
-            'components' => ['gallery']
+            'product'          => $product
         ];
 
         return view('product.main', $data);

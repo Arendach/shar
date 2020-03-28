@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-gd": "*",
+        "ext-json": "*",
         "eventviva/php-image-resize": "^1.9",
         "fideloper/proxy": "^4.0",
         "jenssegers/agent": "^2.6",
@@ -16,9 +18,11 @@
         "laravel/tinker": "^1.0",
         "mobizon/mobizon-php": "^2.0",
         "spatie/image-optimizer": "^1.2",
-        "ext-json": "*"
+        "spatie/laravel-responsecache": "^6.3",
+        "tholu/php-packer": "^0.2.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",

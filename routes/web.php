@@ -4,7 +4,10 @@
 /**
  * Front Routs
  */
-Route::get('/', 'IndexController@section_main');
+Route::middleware('cache.response')->group(function (){
+    Route::get('/', 'IndexController@section_main');
+
+});
 
 Route::get('/f/{id}', function ($id) {
     return Redirect::to(uri('admin/feedback/' . $id));
@@ -14,8 +17,7 @@ Route::post('/admin/login', 'Admin\UserController@action_login');
 
 Route::get('/norm', 'NormController@index');
 
-Route::get('/scripts.js', 'FrontController@scripts');
-
+Route::get('product/{id}', 'ProductController@show')->name('product');
 /**
  * Admin Routs
  */
