@@ -82,12 +82,6 @@ class Category extends Model
             ->where('public', 1);
     }
 
-    public function allProducts()
-    {
-        return $this->hasMany(Product::class, 'category_id', 'id')
-            ->where('public', 1);
-    }
-
     public function getUrlAttribute()
     {
         return route('category', $this->slug);

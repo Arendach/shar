@@ -11,7 +11,9 @@ require('./components/sweetalert/sweetalert')
 require('./components/sweetalert/sweetalert_functions')
 require('./functions')
 require('./modules/cart')
+window.PhotoSwipe = require('photoswipe')
+window.PhotoSwipeUI_Default = require('photoswipe').PhotoSwipeUI_Default
 
-$(function($) {
+$(function ($) {
     $("img.lazy").Lazy();
 });

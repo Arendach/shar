@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function section_main()
     {
-        $items = Category::withCount('allProducts')->orderByDesc('sort')->get();
+        $items = Category::withCount('products')->orderByDesc('sort')->get();
 
         $items->each(function (Category $category) {
             $category->load(['products' => function (HasMany $builder) {

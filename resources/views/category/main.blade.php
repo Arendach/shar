@@ -9,28 +9,38 @@
     </div>
 
     <div class="container">
-        @if($category->allProducts->count())
+        @if($category->products->count())
             <div class="products-cat">
-                @foreach($category->allProducts as $item)
+                @foreach($category->products as $item)
                     <div class="product-cat">
-                        <a href="{{ uri('product', ['id' => $item->id]) }}">
-                            <img src="{{ $item->photo }}" alt="">
+                        <a href="{{ $item->url }}">
+                            <img class="lazy"
+                                 src="{{ $item->lazy }}"
+                                 data-src="{{ $item->photo_min }}"
+                                 alt="{{ $item->name }}"
+                            >
                         </a>
-                        <h2 class="product-name">{{ $item->name }}</h2>
-                        <div class="product-short">
-                            {!! $item->short !!}
-                        </div>
+                        <h2 class="product-name">
+                            {{ $item->name }}
+                        </h2>
+
                         <div class="product-cat-footer">
-                            <div class="product-cat-price">Цена: <b>{{ number_format($item->price, 2) }}грн</b><br></div>
+                            <div class="product-cat-price">
+                                Цена: <b>{{ number_format($item->price) }} грн</b>
+                            </div>
                             <div class="product-cat-buttons">
-                                <a class="btn btn-primary"
-                                   href="{{ uri('product', ['id' => $item->id]) }}">Подробнее</a>
+                                <a class="btn btn-primary" href="{{ $item->url }}">
+                                    Подробнее
+                                </a>
                                 <button data-data="{{ json_encode([
                                                 'name' => $item->name,
                                                 'price' => $item->price,
                                                 'id' => $item->id,
-                                                'photo' => $item->photo
-                                                ]) }}" class="btn btn-primary to_cart">В корзину
+                                                'photo' => $item->photo_min
+                                                ]) }}"
+                                        class="btn btn-primary to_cart"
+                                >
+                                    В корзину
                                 </button>
                             </div>
                         </div>

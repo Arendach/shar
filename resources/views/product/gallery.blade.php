@@ -42,6 +42,7 @@
         </figcaption>
     </figure>
 
+        @if(false)
     @foreach($product->images as $item)
         <?php list($width_l, $height_l, $type_l, $attr_l) = getimagesize(public_path($item->getOriginal('path_large'))) ?>
 
@@ -52,5 +53,6 @@
             <figcaption itemprop="caption description">{{ $item->description }}</figcaption>
         </figure>
     @endforeach
+            @endif
 
 </div>

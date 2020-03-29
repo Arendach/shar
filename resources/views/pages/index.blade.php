@@ -11,7 +11,7 @@
         </div>
 
         @forelse($items as $category)
-            @continue(!$category->products->count())
+            @continue(!$category->products_count)
 
             <h2 class="title">
                 {{ $category->name }}
@@ -24,20 +24,18 @@
                 <div class="products-cat">
                     @foreach($category->products as $item)
                         <div class="product-cat">
-                            <a href="{{ uri('product', ['id' => $item->id]) }}">
+                            <a href="{{ $item->url }}">
                                 <img class="lazy" src="{{ $item->lazy }}" data-src="{{ $item->photo_min }}"
                                      alt="{{ $item->name }}">
                             </a>
                             <h3 class="product-name">{{ $item->name }}</h3>
-                            {!! $item->short !!}
-                            <br><br>
+
                             <div class="product-cat-footer">
                                 <div class="product-cat-price">
-                                    Цена: <b>{{ number_format($item->price, 2) }} грн</b>
-                                    <br>
+                                    Цена: <b>{{ number_format($item->price) }} грн</b>
                                 </div>
                                 <div class="product-cat-buttons">
-                                    <a class="btn btn-primary" href="{{ uri('product', ['id' => $item->id]) }}">
+                                    <a class="btn btn-primary" href="{{ $item->url }}">
                                         Подробнее
                                     </a>
                                     <button data-data="{{ json_encode([
@@ -52,16 +50,16 @@
                         </div>
                     @endforeach
 
-                    @if($category->all_products_count > $category->products->count())
+                    @if($category->products_count > $category->products->count())
                         <div class="product-cat" style="text-align: center; display: flex">
                             <div style="margin: auto">
-                                <a href="{{ uri('category', ['id' => $category->id]) }}">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/More_Icon_C.svg">
+                                <a href="{{ $category->url }}">
+                                    <img src="{{ asset('images/more.svg') }}" alt="Больше товаров данной категории">
                                 </a>
 
                                 <br>
 
-                                <a style="font-size: 25px" href="{{ uri('category', ['id' => $category->id]) }}">
+                                <a style="font-size: 25px" href="{{ $category->url }}">
                                     Больше товаров данной категории
                                 </a>
                             </div>

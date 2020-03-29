@@ -41,9 +41,9 @@
                 {{-- Наличие товара --}}
                 <div style="margin-top: 10px">
                     @if($product->on_storage)
-                        <span style="color: green"><i class="fa fa-check"></i> Есть в наличии</span>
+                        <span class="text-success"><i class="fa fa-check"></i> Есть в наличии</span>
                     @else
-                        <span style="color: red"><i class="fa fa-remove"></i> Нет в наличии</span>
+                        <span class="text-danger"><i class="fa fa-remove"></i> Нет в наличии</span>
                     @endif
                 </div>
 
@@ -61,7 +61,8 @@
                                                 'id' => $product->id,
                                                 'photo' => $product->photo
                                                 ]) }}"
-                                class="btn btn-success btn-sm btn-block to_cart">
+                                class="btn btn-success btn-sm btn-block to_cart"
+                        >
                             В корзину
                         </button>
                     </div>
@@ -175,6 +176,10 @@
 
         </div>
     </div>
+
+@endsection
+
+@section('js')
 
     <script>
         var initPhotoSwipeFromDOM = function (gallerySelector) {
@@ -382,5 +387,4 @@
         initPhotoSwipeFromDOM('.ttttt1');
     </script>
 
-
-@endsection('content')
+@endsection

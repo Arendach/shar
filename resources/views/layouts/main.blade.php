@@ -96,10 +96,11 @@
         <div class="row align-items-center">
             <div class="col-12">
                 <ul style="-webkit-padding-start: 0;">
-                    @foreach($categories as $item)
+                    @foreach($categories as $categoryItem)
+                        @continue(!$categoryItem->products_count)
                         <li>
-                            <a href="{{ uri('category', ['id' => $item->id]) }}">
-                                {{ $item->name }}
+                            <a href="{{ $categoryItem->url }}">
+                                {{ $categoryItem->name }}
                             </a>
                         </li>
                     @endforeach
@@ -126,6 +127,8 @@
 <a href="#" style="z-index: 2" class="scrollup">Наверх</a>
 
 <script src="{{ asset('js/app.js') }}"></script>
+
+@yield('js')
 
 </body>
 </html>
