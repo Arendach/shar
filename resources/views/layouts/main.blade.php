@@ -53,39 +53,18 @@
 
         <hr>
 
-
-        {{-- Desktop search --}}
-        <div class="d-none d-lg-block d-xl-block d-sm-none d-md-none">
-            <div class="container">
-                <form id="search" class="row">
-                    <div class="col-10">
-                        <input required value="{{ $search_query ?? '' }}" placeholder="Начните вводить..." name="query"
-                               type="search" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fa fa-search"></i> Поиск
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        {{-- mobile search --}}
-        <div class="d-sm-block d-md-block d-lg-none d-xl-none">
-            <div class="container">
-                <form id="search" class="row">
-                    <div class="col-12" style="margin-bottom: 10px">
-                        <input required value="{{ $search_query ?? '' }}" placeholder="Начните вводить..." name="query"
-                               type="search" class="form-control form-control-sm">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-sm">
-                            <i class="fa fa-search"></i> Поиск по сайту
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div class="container">
+            <form id="search" class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10 mb-3 mb-sm-3 mb-md-3 mb-lg-0 mb-xl-0">
+                    <input required value="{{ $search_query ?? '' }}" placeholder="Поиск товаров ..." name="query"
+                           type="search" class="form-control">
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa fa-search"></i> Начать
+                    </button>
+                </div>
+            </form>
         </div>
 
         <hr>

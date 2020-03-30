@@ -11,6 +11,7 @@ Route::middleware('cache.response')->group(function () {
 });
 
 Route::get('/search/{query}', 'SearchController@index')->middleware('global');
+Route::redirect('/search', '/');
 
 
 Route::get('/f/{id}', function ($id) {

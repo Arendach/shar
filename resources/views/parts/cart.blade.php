@@ -76,7 +76,8 @@
 
                     <div class="form-group">
                         <label for="phone">Телефон</label>
-                        <input pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required id="phone" name="phone" class="form-control form-control-sm">
+                        <input pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" required id="phone" name="phone"
+                               class="form-control form-control-sm">
                     </div>
 
                     <div class="form-group">

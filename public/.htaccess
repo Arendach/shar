@@ -46,8 +46,55 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml appl
   AddOutputFilterByType DEFLATE text/javascript
   AddOutputFilterByType DEFLATE text/plain
   AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject application/x-font-ttf font/opentype image/svg+xml image/x-icon
+  AddOutputFilterByType DEFLATE / x-font-ttf application / x-font-opentype image / svg + xml
 </IfModule>
+
+
+# Fonts
+# Add correct content-type for fonts
+AddType application/vnd.ms-fontobject .eot
+AddType application/x-font-ttf .ttf
+AddType application/x-font-opentype .otf
+AddType application/x-font-woff .woff
+AddType image/svg+xml .svg
 
 <FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf|js|css|pdf)$">
   Header set Cache-Control "max-age=2592000"
 </FilesMatch>
+
+<IfModule mod_expires.c>
+    # Enable expires
+    ExpiresActive On
+
+    # Default a cache expiration
+    ExpiresDefault "access plus 10 month"
+
+    # Images
+    ExpiresByType image/gif                 "access plus 1 month"
+    ExpiresByType image/png                 "access plus 1 month"
+    ExpiresByType image/jpg                 "access plus 1 month"
+    ExpiresByType image/jpeg                "access plus 1 month"
+
+    # CSS, JavaScript
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+    ExpiresByType text/javascript           "access plus 1 year"
+
+    ExpiresActive on
+
+    # Add a far future Expires header for fonts
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/x-font-opentype "access plus 1 year"
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+
+
+### Удалить заголовок ETag (иначе есть проблемы с кешированием при включенном сжатии)
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None

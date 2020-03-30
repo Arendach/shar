@@ -20,7 +20,7 @@ class ProductController extends Controller
             'meta_keywords'    => $product->meta_keywords,
             'product'          => $product,
             'breadcrumbs'      => [
-                [$product->category->name, $product->category->id],
+                [$product->category->name, $product->category->url],
                 [$product->name]
             ]
         ];

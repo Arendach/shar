@@ -4,4 +4,4 @@
 
 
 
-@endsection('content')
+@endsection

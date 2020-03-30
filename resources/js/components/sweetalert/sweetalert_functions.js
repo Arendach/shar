@@ -28,7 +28,7 @@ function success_popup(mess) {
     });
 }
 
-function errorHandler(response) {
+window.errorHandler = function (response) {
     try {
         var answer = JSON.parse(response.responseText);
         var message = answer.message !== undefined ? answer.message : 'Неизвестная ошибка!';
@@ -48,7 +48,7 @@ function errorHandler(response) {
     }
 }
 
-function successHandler(response, func) {
+window.successHandler = function (response, func) {
     try {
         if (func === undefined) {
             func = function () {

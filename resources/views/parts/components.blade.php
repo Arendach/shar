@@ -1,4 +1,4 @@
-<?php<?php
+<?php
 function getComponentFiles($type, $component)
 {
     $dir = public_path("$type/components/$component/");
@@ -7,6 +7,7 @@ function getComponentFiles($type, $component)
     $files = cleanFIlesList($type, $files);
     return $files;
 }
+
 function cleanFilesList($ext, $array)
 {
     $temp = [];
@@ -16,6 +17,7 @@ function cleanFilesList($ext, $array)
     }
     return $temp;
 }
+
 function jsWrite($files, $component)
 {
     $temp = '';
@@ -24,6 +26,7 @@ function jsWrite($files, $component)
     }
     return $temp;
 }
+
 function cssWrite($files, $component)
 {
     $temp = '';
@@ -32,6 +35,7 @@ function cssWrite($files, $component)
     }
     return $temp;
 }
+
 $css_components = '';
 $js_components = '';
 if (isset($components)) {

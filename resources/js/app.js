@@ -17,3 +17,5 @@ window.PhotoSwipeUI_Default = require('photoswipe').PhotoSwipeUI_Default
 $(function ($) {
     $("img.lazy").Lazy();
 });
+
+require('./custom')

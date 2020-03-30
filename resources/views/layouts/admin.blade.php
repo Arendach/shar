@@ -14,9 +14,11 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('admin_files/js/custom.js') }}"></script>
-
+    <script src="{{ asset('js/jquery.input_mask.js') }}"></script>
     {!!  $js_components !!}
+
+    <script defer src="{{ asset('admin_files/js/custom.js') }}"></script>
+
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">

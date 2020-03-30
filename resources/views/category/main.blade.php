@@ -15,7 +15,7 @@
                     <div class="product-cat">
                         <a href="{{ $item->url }}">
                             <img class="lazy"
-                                 src="{{ $item->lazy }}"
+                                 src=""
                                  data-src="{{ $item->photo_min }}"
                                  alt="{{ $item->name }}"
                             >
