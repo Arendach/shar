@@ -1,18 +1,63 @@
 .feedback-open {
-    overflow: hidden;
-    padding: 9px 14px;
+    padding: 8px 14px;
 }
 
-.feedback-open span {
-    display: none;
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+    .feedback-open {
+        padding: 8px 14px;
+    }
 }
 
-.feedback-open:hover {
-    width: 176px;
-    opacity: .6;
-    animation: none;
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    .feedback-open {
+        padding: 8px 14px;
+    }
 }
 
-.feedback-open:hover span {
-    display: inline;
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .feedback-open {
+        overflow: hidden;
+        padding: 9px 14px;
+    }
+
+    .feedback-open span {
+        display: none;
+    }
+
+    .feedback-open:hover {
+        width: 176px;
+        opacity: .6;
+        animation: none;
+    }
+
+    .feedback-open:hover span {
+        display: inline;
+    }
+
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    .feedback-open {
+        overflow: hidden;
+        padding: 9px 14px;
+    }
+
+    .feedback-open span {
+        display: none;
+    }
+
+    .feedback-open:hover {
+        width: 176px;
+        opacity: .6;
+        animation: none;
+    }
+
+    .feedback-open:hover span {
+        display: inline;
+    }
+
 }
