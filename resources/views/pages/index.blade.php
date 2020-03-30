@@ -25,7 +25,7 @@
                     @foreach($category->products as $item)
                         <div class="product-cat">
                             <a href="{{ $item->url }}">
-                                <img class="lazy" src="{{ $item->lazy }}" data-src="{{ $item->photo_min }}"
+                                <img class="lazy" src="" data-src="{{ $item->photo_min }}"
                                      alt="{{ $item->name }}">
                             </a>
                             <h3 class="product-name">{{ $item->name }}</h3>
@@ -54,7 +54,7 @@
                         <div class="product-cat" style="text-align: center; display: flex">
                             <div style="margin: auto">
                                 <a href="{{ $category->url }}">
-                                    <img src="{{ asset('images/more.svg') }}" alt="Больше товаров данной категории">
+                                    <img class="lazy" src="" data-src="{{ asset('images/more.svg') }}" alt="Больше товаров данной категории">
                                 </a>
 
                                 <br>

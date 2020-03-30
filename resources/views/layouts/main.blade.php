@@ -17,15 +17,7 @@
         <meta property="og:url" content="{{ $product->photo }}"/>
     @endisset
     <meta property="og:site_name" content="shar.kiev.ua"/>
-
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    @if(Agent::isDesktop())
-        <link rel="stylesheet" href="{{ asset('css/desktop.css') }}">
-    @else
-        <link rel="stylesheet" href="{{ asset('css/mobile.css') }}">
-    @endif
-
     <title>{{ $title ?? 'Enter Title' }}</title>
 </head>
 <body>
@@ -61,7 +53,9 @@
 
         <hr>
 
-        @if(Agent::isDesktop())
+
+        {{-- Desktop search --}}
+        <div class="d-none d-lg-block d-xl-block d-sm-none d-md-none">
             <div class="container">
                 <form id="search" class="row">
                     <div class="col-10">
@@ -70,12 +64,15 @@
                     </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fa fa-search"></i> Поиск по сайту
+                            <i class="fa fa-search"></i> Поиск
                         </button>
                     </div>
                 </form>
             </div>
-        @else
+        </div>
+
+        {{-- mobile search --}}
+        <div class="d-sm-block d-md-block d-lg-none d-xl-none">
             <div class="container">
                 <form id="search" class="row">
                     <div class="col-12" style="margin-bottom: 10px">
@@ -89,7 +86,7 @@
                     </div>
                 </form>
             </div>
-        @endif
+        </div>
 
         <hr>
 
