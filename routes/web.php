@@ -1,5 +1,11 @@
 <?php
 
+Route::get('category', function () {
+    abort_if(!request()->has('id'), 404);
+
+    $category = \App\Models\Category::findOrFail(request('id'));
+    return redirect($category->url);
+});
 
 /**
  * Front Routs
@@ -8,6 +14,7 @@ Route::middleware('cache.response')->group(function () {
     Route::get('/', 'IndexController@section_main');
     Route::get('product/{id}', 'ProductController@show')->name('product');
     Route::get('category/{slug}', 'CategoryController@show')->name('category');
+    Route::get('sitemap.xml', 'SiteMapController@index')->name('sitemap.xml');
 });
 
 Route::get('/search/{query}', 'SearchController@index')->middleware('global');

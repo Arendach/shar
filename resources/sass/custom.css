@@ -1,16 +1,16 @@
 @font-face {
     font-family: FuturaPTLightOblique;
-    src: url(/public/fonts/FuturaPTLightOblique.otf);
+    src: url(/fonts/FuturaPTLightOblique.otf);
 }
 
 @font-face {
     font-family: FuturaPTDemi;
-    src: url(/public/fonts/FuturaPTDemi.otf);
+    src: url(/fonts/FuturaPTDemi.otf);
 }
 
 @font-face {
     font-family: FuturaPTLight;
-    src: url(/public/fonts/FuturaPTLight.otf);
+    src: url(/fonts/FuturaPTLight.otf);
 }
 
 header {
@@ -168,7 +168,7 @@ img, iframe {
     left: 40px;
     display: none;
     text-indent: 9999px;
-    background: url('/public/images/top.png') no-repeat;
+    background: url('/images/top.png') no-repeat;
     transition: all 0.3s ease;
 }
 
