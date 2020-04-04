@@ -15,6 +15,8 @@
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/jquery.input_mask.js') }}"></script>
+    <script src="{{ asset('js/jquery.serialize_json.js') }}"></script>
+    <script src="{{ asset('js/jquery.cookie.js') }}"></script>
     {!!  $js_components !!}
 
     <script defer src="{{ asset('admin_files/js/custom.js') }}"></script>
@@ -60,9 +62,15 @@
 
                 <?php if (can('orders')) { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ uri('/admin/order') }}">Заказы</a>
+                    <a class="nav-link" href="{{ url('/admin/order') }}">Заказы</a>
                 </li>
                 <?php } ?>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ \App\Models\Feedback::where('accepted', 0)->count() ? 'text-danger' : '' }}" href="{{ url('/admin/feedback') }}">
+                        Перезвонить срочно
+                    </a>
+                </li>
 
                 <?php if (can('settings')) { ?>
                 <li class="nav-item">
@@ -87,9 +95,6 @@
                             Товары
                         </a>
                         <?php } ?>
-                        <a class="dropdown-item" href="{{ uri('admin/feedback') }}">
-                            Обратная связь
-                        </a>
                     </div>
                 </li>
                 <?php } ?>

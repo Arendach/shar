@@ -141,33 +141,37 @@ $(document).ready(function () {
         return false;
     });
 
-    $("#feedback [name=phone]").mask({"mask": "999-999-99-99"});
+    $("#feedback [name=phone]").mask('999-999-99-99');
 
     $body.on('submit', '#feedback form', function (event) {
-        event.preventDefault();
+        event.preventDefault()
 
-        var data = $(this).serializeJSON();
-        var $form = $(this);
+        let $form = $(this)
+        let data = $form.serializeJSON()
+
+        $form.find('button').attr('disabled', true)
 
         $.ajax({
-            type: 'post',
-            url: '/feedback',
+            type: $form.attr('method'),
+            url: $form.attr('action'),
             data: data,
             success() {
-                $form.trigger('reset');
-                $('#feedback').modal('hide');
+                $form.trigger('reset')
+                $('#feedback').modal('hide')
+                $form.find('button').attr('disabled', false)
                 swal({
                     type: 'success',
                     title: 'Успешно!',
                     text: 'Ваше сообщение успешно отправлено! <br> Ждите звонка менеджера!',
                     html: true
-                });
+                })
             },
             error() {
-                swal('Ошибка!', 'Ваше сообщение не отправлено!', 'error');
+                swal('Ошибка!', 'Ваше сообщение не отправлено!', 'error')
+                $form.find('button').attr('disabled', false)
             }
         })
-    });
+    })
 
     $body.on('submit', 'form#search', function (event) {
         event.preventDefault();

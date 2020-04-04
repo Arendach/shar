@@ -1,13 +1,8 @@
-@if(Agent::isDesktop())
-    <div data-toggle="modal" data-target="#feedback" class="feedback-open">
-        <i class="fa fa-phone"></i>
-        <span>Перезвоните мне</span>
-    </div>
-@else
-    <div data-toggle="modal" data-target="#feedback" class="feedback-open">
-        <i class="fa fa-phone"></i>
-    </div>
-@endif
+<div data-toggle="modal" data-target="#feedback" class="feedback-open">
+    <i class="fa fa-phone"></i>
+    <span class="d-none d-sm-none d-md-none d-lg-inline d-xl-inline">Перезвоните мне</span>
+</div>
+
 <!-- Modal -->
 
 <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-hidden="true">
@@ -20,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="{{ route('feedback.create') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>
@@ -39,7 +34,7 @@
                         <label>Сообщение</label>
                         <textarea class="form-control form-control-sm" name="message"></textarea>
                     </div>
-                    <div class="form-group" style="margin-bottom: 0">
+                    <div class="form-group mb-0">
                         <button class="btn btn-sm btn-primary">Отправить</button>
                     </div>
                 </form>

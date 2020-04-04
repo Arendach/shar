@@ -28,10 +28,10 @@ function success_popup(mess) {
     });
 }
 
-function errorHandler(response) {
+window.errorHandler = function (response) {
     try {
-        var answer = JSON.parse(response.responseText);
-        var message = answer.message !== undefined ? answer.message : 'Неизвестная ошибка!';
+        let answer = response.responseJSON
+        let message = answer.message !== undefined ? answer.message : 'Неизвестная ошибка!';
         swal({
             type: 'error',
             text: message,
@@ -48,7 +48,7 @@ function errorHandler(response) {
     }
 }
 
-function successHandler(response, func) {
+window.successHandler = function (response, func) {
     try {
         if (func === undefined) {
             func = function () {
@@ -60,8 +60,8 @@ function successHandler(response, func) {
             };
         }
 
-        var answer = JSON.parse(response);
-        var message = answer.hasOwnProperty('message') ? answer.message : 'Данные сохранены!';
+        let message = response.hasOwnProperty('message') ? response.message : 'Данные сохранены!';
+
         swal({
             type: 'success',
             text: message,

@@ -2,36 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
-use Illuminate\Support\Facades\DB;
-use Mobizon\MobizonApi;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function action_create($post)
+    public function create(Request $request)
     {
-        if (empty($post->name))
-            res(400, 'Введите имя!');
+        if (!$request->name) {
+            return response()->json([
+                'message' => 'Введите имя!'
+            ], 400);
+        }
 
-        if (!preg_match('/[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}/', $post->phone))
-            res(400, 'Введите номер телефона в правильном формате!');
+        if (!preg_match('/[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}/', $request->phone)) {
+            return response()->json([
+                'Введите номер телефона в правильном формате!'
+            ], 400);
+        }
 
-        if (!isset($post->products) || empty($post->products))
-            res(400, 'Выберите хотя-бы один товар для заказа!');
+        if (!is_array($request->products) || count($request->products) == 0) {
+            return response()->json([
+                'Выберите хотя-бы один товар для заказа!'
+            ], 400);
+        }
 
-        $id = Order::create($post);
+        $id = Order::create($request);
 
         $this->sms_notification($id);
 
-        setcookie('cart_products', '', time() - 1);
+        setcookie('cart_products', '', time() - 99999, '/');
 
-        res(200, 'Ваш заказ успешно принято!Дождитесь звонка менеджера!');
+        return response()->json([
+            'message' => 'Ваш заказ успешно принят! Дожидайтесь звонка менеджера!'
+        ]);
     }
 
     public function sms_notification($id)
     {
-        if (settings('sms.use') == 1)
-            send_sms(settings('sms.number'), settings('sms.template'), 'Оповещеие об заказе №' . $id);
+        if (settings('sms.use') == 1) {
+            // send_sms(settings('sms.number'), settings('sms.template'), 'Оповещеие об заказе №' . $id);
+        }
     }
 }

@@ -50,7 +50,12 @@
             "database/factories"
         ],
         "files": [
-            "functions.php"
+            "helpers/auth.php",
+            "helpers/dates.php",
+            "helpers/deprecated.php",
+            "helpers/filesystem.php",
+            "helpers/main.php",
+            "helpers/math.php"
         ]
     },
     "autoload-dev": {

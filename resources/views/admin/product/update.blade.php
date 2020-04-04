@@ -87,6 +87,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="priority">Приоритет</label>
+                    <input class="form-control form-control-sm" id="priority" name="priority" value="{{ $product->priority }}">
+                </div>
+
+                <div class="form-group">
                     <label for="articul"><i class="text-danger">*</i> Артикул</label>
                     <input class="form-control form-control-sm" id="articul" name="articul"
                            value="{{ $product->articul }}">

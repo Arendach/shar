@@ -17,9 +17,13 @@
         </div>
 
         <div class="form-group">
+            <label for="slug"><i class="text-danger">*</i> Slug</label>
+            <input class="form-control form-control-sm" name="slug" id="slug">
+        </div>
+
+        <div class="form-group">
             <label for="description"><i class="text-danger">*</i> Описание</label>
             <textarea class="form-control form-control-sm" name="description" id="description"></textarea>
-
         </div>
 
         <div class="form-group">
@@ -39,4 +43,4 @@
 
     </form>
 
-@endsection('content')
+@endsection

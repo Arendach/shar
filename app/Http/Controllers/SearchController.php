@@ -13,6 +13,7 @@ class SearchController extends Controller
         $products = Product::where('name', 'like', "%$query%")
             ->orWhere('description', 'like', "$query")
             ->orWhere('articul', 'like', "%$query%")
+            ->orderByDesc('priority')
             ->paginate(24)
             ->onEachSide(2);
 

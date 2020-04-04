@@ -7,12 +7,14 @@
             <tr>
                 <th>Имя</th>
                 <th>Телефон</th>
+                <th>Дата</th>
                 <th style="width: 127px">Действия</th>
             </tr>
             @foreach($feedback as $item)
                 <tr>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->phone }}</td>
+                    <td>{{ $item->created_at->format('d.m.Y H:i') }}</td>
                     <td style="width: 127px">
                         @if($item->accepted == 0)
                             <button data-type="ajax_request"

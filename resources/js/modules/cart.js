@@ -26,7 +26,7 @@ $(document).ready(function () {
 
         $('.order_sum').text(number_format(order_sum, 2, '.', ',') + ' грн')
         $('.cart-count').text(count);
-        $.cookie('cart_products', JSON.stringify(ids));
+        $.cookie('cart_products', JSON.stringify(ids), {path: '/'});
     }
 
     // відкрити корзину по кліку
@@ -127,20 +127,20 @@ $(document).ready(function () {
 
     $body.on('submit', 'form#cart_form', function (event) {
         event.preventDefault();
+        let form = $(this)
 
         if (document.getElementById("cart_form").checkValidity()) {
-            var data = $(this).serializeJSON();
-            data.action = 'create';
+            let data = $(this).serializeJSON();
             data.products = {};
 
             $('.product').each(function () {
-                var $row = $(this);
+                let $row = $(this);
                 data.products[$row.data('id')] = $row.find('.product_amount').text();
             });
 
             $.ajax({
-                type: 'post',
-                url: '/order',
+                type: form.attr('method'),
+                url: form.attr('action'),
                 data: data,
                 success: function (answer) {
                     successHandler(answer);

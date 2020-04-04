@@ -32,18 +32,6 @@ class Category extends Model
         return DB::table('category')->where('archive', 1)->get();
     }
 
-    public static function create($post)
-    {
-        return DB::table('category')->insertGetId([
-            'name'             => $post->name,
-            'description'      => $post->description,
-            'meta_keywords'    => $post->meta_keywords,
-            'meta_description' => $post->meta_description,
-            'meta_title'       => $post->meta_title,
-            'archive'          => 0
-        ]);
-    }
-
     public static function update_category($post)
     {
         return DB::table('category')

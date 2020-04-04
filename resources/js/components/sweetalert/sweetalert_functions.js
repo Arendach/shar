@@ -30,8 +30,8 @@ function success_popup(mess) {
 
 window.errorHandler = function (response) {
     try {
-        var answer = JSON.parse(response.responseText);
-        var message = answer.message !== undefined ? answer.message : 'Неизвестная ошибка!';
+        let answer = response.responseJSON
+        let message = answer.message !== undefined ? answer.message : 'Неизвестная ошибка!';
         swal({
             type: 'error',
             text: message,
@@ -60,8 +60,8 @@ window.successHandler = function (response, func) {
             };
         }
 
-        var answer = JSON.parse(response);
-        var message = answer.hasOwnProperty('message') ? answer.message : 'Данные сохранены!';
+        let message = response.hasOwnProperty('message') ? response.message : 'Данные сохранены!';
+
         swal({
             type: 'success',
             text: message,

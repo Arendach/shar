@@ -14,7 +14,8 @@ class IndexController extends Controller
 
         $items->each(function (Category $category) {
             $category->load(['products' => function (HasMany $builder) {
-                $builder->limit(settings('main.items_to_category'));
+                $builder->limit(settings('main.items_to_category'))
+                    ->orderByDesc('priority');
             }]);
         });
 

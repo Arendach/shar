@@ -27,7 +27,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="cart_form">
+            <form id="cart_form" action="{{ route('order.create') }}" method="POST">
                 <div class="modal-body">
                     <table class="table @if (my_count($_SESSION['cart_products']) == 0) {{ 'none' }} @endif products">
                         <tbody>

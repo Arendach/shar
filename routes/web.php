@@ -1,30 +1,21 @@
 <?php
 
-Route::get('category', function () {
-    abort_if(!request()->has('id'), 404);
+Route::get('category', 'RedirectController@category');
+Route::get('product', 'RedirectController@product');
+Route::get('f/{id}', 'RedirectController@feedback');
+Route::redirect('search', '/');
 
-    $category = \App\Models\Category::findOrFail(request('id'));
-    return redirect($category->url);
-});
-
-/**
- * Front Routs
- */
 Route::middleware('cache.response')->group(function () {
-    Route::get('/', 'IndexController@section_main');
+    Route::get('/', 'IndexController@section_main')->name('home');
     Route::get('product/{id}', 'ProductController@show')->name('product');
     Route::get('category/{slug}', 'CategoryController@show')->name('category');
     Route::get('sitemap.xml', 'SiteMapController@index')->name('sitemap.xml');
 });
 
-Route::get('/search/{query}', 'SearchController@index')->middleware('global');
-Route::redirect('/search', '/');
+Route::get('/search/{query}', 'SearchController@index')->name('search');
 
-
-Route::get('/f/{id}', function ($id) {
-    return Redirect::to(uri('admin/feedback/' . $id));
-});
-
+Route::post('order/create', 'OrderController@create')->name('order.create');
+Route::post('feedback/create', 'FeedbackController@create')->name('feedback.create');
 
 /**
  * Admin Routs
@@ -62,4 +53,4 @@ Route::post('/{controller}', function ($controller) {
         $obj = new $classname();
         return $obj->post_handle($_POST);
     }
-})->where(['controller' => '[a-z]+'])->middleware('global');
+})->where(['controller' => '[a-z]+']);

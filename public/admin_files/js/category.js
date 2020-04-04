@@ -5,7 +5,7 @@ $(document).ready(function () {
     $body.on('submit', 'form#update', function (event) {
         event.preventDefault();
 
-        var data = $(this).serializeJSON();
+        let data = $(this).serializeJSON();
 
         data.action = 'update';
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
     $body.on('submit', 'form#create', function (event) {
         event.preventDefault();
 
-        var data = $(this).serializeJSON();
+        let data = $(this).serializeJSON();
 
         data.action = 'create';
 
@@ -34,7 +34,6 @@ $(document).ready(function () {
             url: url('admin/category'),
             data: data,
             success: function (answer) {
-                var answer = JSON.parse(answer);
                 window.location.href = url('admin/category?section=update&notification=created&id=' + answer.id)
             },
             error: function (answer) {
@@ -44,7 +43,7 @@ $(document).ready(function () {
     });
 
     $body.on('click', '.to_archive', function () {
-        var id = $(this).data('id');
+        let id = $(this).data('id');
 
         $.ajax({
             type: 'post',
