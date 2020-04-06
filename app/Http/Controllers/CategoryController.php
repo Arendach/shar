@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CategoryController extends Controller
 {
     public function show($slug)
     {
-        $category = Category::with(['products' => function (Builder $builder) {
+        $category = Category::with(['products' => function (HasMany $builder) {
             $builder->orderByDesc('priority');
         }])->where('slug', $slug)->firstOrFail();
 

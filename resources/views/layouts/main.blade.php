@@ -42,7 +42,11 @@
                     <i class="fa fa-whatsapp"></i> WhatsApp
                 </a>
                 <br>
-                <a target="_blank" href="viber://chat?number=+380687858529">
+                <a target="_blank" href="viber://chat?number=+380687858529" class="d-none d-sm-none d-md-none d-lg-block d-xl-block">
+                    <i class="fa fa-whatsapp"></i> Viber
+                </a>
+
+                <a target="_blank" href="viber://add?number=+380687858529" class="d-block d-sm-block d-md-block d-lg-none d-xl-none">
                     <i class="fa fa-whatsapp"></i> Viber
                 </a>
             </div>
