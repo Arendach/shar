@@ -178,4 +178,5 @@ $(document).ready(function () {
         window.location.href = '/search/' + $(this).find('input').val();
     });
 
+    $('input').attr('autocomplete', 'off');
 });

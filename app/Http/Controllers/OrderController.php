@@ -41,7 +41,7 @@ class OrderController extends Controller
     public function sms_notification($id)
     {
         if (settings('sms.use') == 1) {
-            // send_sms(settings('sms.number'), settings('sms.template'), 'Оповещеие об заказе №' . $id);
+            send_sms(settings('sms.number'), settings('sms.template'), 'Оповещеие об заказе №' . $id);
         }
     }
 }
