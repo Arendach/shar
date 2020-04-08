@@ -139,7 +139,7 @@
 
                         <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
-                        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                        <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
                         <!-- element will get class pswp__preloader--active when preloader is running -->
                         <div class="pswp__preloader">
                             <div class="pswp__preloader__icn">
@@ -168,7 +168,6 @@
 
             </div>
         </div>
-
         <script>
             var initPhotoSwipeFromDOM = function (gallerySelector) {
 
@@ -372,7 +371,7 @@
             };
 
             // execute above function
-            initPhotoSwipeFromDOM('.ttttt1');
+            initPhotoSwipeFromDOM('.my-gallery');
         </script>
 
 

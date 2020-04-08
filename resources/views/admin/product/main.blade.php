@@ -68,7 +68,7 @@
                     <a href="{{ url('admin/product?section=update&id=' . $item->id) }}" class="btn btn-sm btn-primary">
                         <i class="fa fa-pencil"></i>
                     </a>
-                    <button class="btn btn-sm btn-danger">
+                    <button class="btn btn-sm btn-danger" onclick="deleteProduct('{{ $item->id }}')">
                         <i class="fa fa-remove"></i>
                     </button>
                 </td>
@@ -78,9 +78,12 @@
 
     {{ $items->links() }}
 
+@endsection
+
+@section('js')
     <script>
         $(document).ready(function () {
-            let serialize = function(obj) {
+            let serialize = function (obj) {
                 let str = [];
                 for (let p in obj)
                     if (obj.hasOwnProperty(p)) {
@@ -89,7 +92,7 @@
                 return str.join("&");
             };
 
-            let filter = function (){
+            let filter = function () {
                 let data = {};
 
                 $('.filter').each(function () {
@@ -99,17 +102,30 @@
                 window.location.href = '/admin/product?' + serialize(data);
             };
 
-           $(document).on('click', '#filter', filter);
+            $(document).on('click', '#filter', filter);
 
-           $(document).on('change', '[name="on_storage"],[name="category"]', filter);
+            $(document).on('change', '[name="on_storage"],[name="category"]', filter);
 
-           $(document).on('change', '[name="on_storage"],[name="category"]', filter);
+            $(document).on('change', '[name="on_storage"],[name="category"]', filter);
 
-           $(document).on('keyup', '.filter', function (e) {
+            $(document).on('keyup', '.filter', function (e) {
                 if (e.which == 13) filter();
             });
         });
+
+        window.deleteProduct = function (id) {
+            delete_on_click(function () {
+                $.ajax({
+                    method: 'post',
+                    url: '/admin/product',
+                    data: {
+                        id,
+                        action: 'delete'
+                    },
+                    success: (response) => successHandler(response),
+                    error: (response) => errorHandler(response)
+                })
+            })
+        }
     </script>
-
-
-@endsection('content')
+@endsection

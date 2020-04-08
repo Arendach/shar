@@ -8,15 +8,17 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\DB;
 use Gumlet\ImageResize;
+
 class ProductController extends Controller
 {
     public function section_main()
     {
 
         $data = [
-            'items' => Product::get_items(),
-            'title' => 'Товары',
+            'items'      => Product::get_items(),
+            'title'      => 'Товары',
             'breadcrumb' => [['name' => 'Товары']],
+            'components' => ['sweetalert'],
             'categories' => Category::all()
         ];
 
@@ -26,10 +28,10 @@ class ProductController extends Controller
     public function section_create()
     {
         $data = [
-            'title' => 'Новый товар',
+            'title'      => 'Новый товар',
             'breadcrumb' => [['name' => 'Товары', 'url' => 'admin/product'], ['name' => 'Новый товар']],
             'categories' => Category::all(),
-            'js' => [
+            'js'         => [
                 asset('ckeditor/ckeditor.js'),
                 asset('admin_files/js/product.js'),
             ],
@@ -44,11 +46,11 @@ class ProductController extends Controller
         abort_if(!get('id'), 404);
 
         $data = [
-            'title' => 'Редактирование товара',
+            'title'      => 'Редактирование товара',
             'breadcrumb' => [['name' => 'Товары', 'url' => 'admin/product'], ['name' => 'Редактирование']],
             'categories' => Category::all(),
-            'product' => Product::with('images')->findOrFail(get('id')),
-            'js' => [
+            'product'    => Product::with('images')->findOrFail(get('id')),
+            'js'         => [
                 asset('ckeditor/ckeditor.js'),
                 asset('admin_files/js/product.js'),
             ],
@@ -58,9 +60,9 @@ class ProductController extends Controller
 
         if (get('notification') == 'created') {
             $data['notification'] = [
-                'title' => 'Выполнено!',
+                'title'   => 'Выполнено!',
                 'message' => 'Товар успешно создан!',
-                'type' => 'success'
+                'type'    => 'success'
             ];
         }
 
@@ -161,7 +163,7 @@ class ProductController extends Controller
 
         $uploads = $count - $err;
 
-        if ($err == $count)  res(200, "Ни один файл не был загружен!");
+        if ($err == $count) res(200, "Ни один файл не был загружен!");
         else res(200, "Загружено {$uploads} из $count");
     }
 
@@ -194,6 +196,15 @@ class ProductController extends Controller
         ]);
 
         res(200, 'Описание успешно обновлено!');
+    }
+
+    public function action_delete($post)
+    {
+        Product::where('id', $post->id)->delete();
+
+        return response()->json([
+            'message' => 'Товар видалений'
+        ]);
     }
 
 }

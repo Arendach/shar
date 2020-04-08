@@ -181,6 +181,8 @@
 
 @section('js')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
     <script>
         var initPhotoSwipeFromDOM = function (gallerySelector) {
 
@@ -384,7 +386,7 @@
         };
 
         // execute above function
-        initPhotoSwipeFromDOM('.ttttt1');
+        initPhotoSwipeFromDOM('.my-gallery');
     </script>
 
 @endsection

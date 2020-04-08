@@ -18,6 +18,7 @@
     <script src="{{ asset('js/jquery.serialize_json.js') }}"></script>
     <script src="{{ asset('js/jquery.cookie.js') }}"></script>
     {!!  $js_components !!}
+    @yield('js')
 
     <script defer src="{{ asset('admin_files/js/custom.js') }}"></script>
 
