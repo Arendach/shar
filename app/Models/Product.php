@@ -139,7 +139,8 @@ class Product extends Model
                 'articul'     => $post->articul,
                 'short'       => $post->short,
                 'category_id' => $post->category_id,
-                'description' => $post->description
+                'description' => $post->description,
+                'priority'    => $post->priority
             ]);
     }
 
