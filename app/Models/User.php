@@ -41,6 +41,7 @@ class User extends Model
 
         $session = my_crypt($request->login . $request->password);
 
+
         setcookie('session', $session, time() + 3600);
 
         DB::table('users_session')
