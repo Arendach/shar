@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\AdminLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,22 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    /**
-     * @param Request $request
-     */
-    public function action_login(Request $request)
+    public function action_login(AdminLoginRequest $request)
     {
-        if ($request->login == null)
-            res(400, 'Введите логин!');
-
-        if ($request->password == null)
-            res(400, 'Введите пароль!');
-
-
         if (User::check_login($request)) {
-            res(200);
+            return response('Success');
         } else {
-            res(400, 'Логин или пароль введено не верно!');
+            return response()->json([
+                'message' => 'Логин или пароль введено не верно!'
+            ], 422);
         }
     }
 
@@ -32,8 +25,9 @@ class UserController extends Controller
     {
         unset($_SESSION['user']);
 
-        if (isset($_COOKIE['session']))
+        if (isset($_COOKIE['session'])) {
             User::sessionDestroy($_COOKIE['session']);
+        }
 
         setcookie('session', '', time() - 1);
 
@@ -43,10 +37,10 @@ class UserController extends Controller
     public function section_main()
     {
         $data = [
-            'title' => 'Пользователи',
-            'users' => User::all(),
+            'title'      => 'Пользователи',
+            'users'      => User::all(),
             'components' => ['modal', 'sweetalert', 'serializejson'],
-            'access' => User::get_access_all(),
+            'access'     => User::get_access_all(),
             'breadcrumb' => [['name' => 'Пользователи']]
         ];
 
@@ -56,12 +50,12 @@ class UserController extends Controller
     public function action_register_form()
     {
         return view('admin.users.register_form', [
-            'title' => 'Новый пользователь',
+            'title'  => 'Новый пользователь',
             'access' => User::get_access_all()
         ]);
     }
 
-    public function action_register($post)
+    public function action_register(Request $post)
     {
         if ($post->password != $post->password_conf)
             res(400, 'Пароли не совпадают!');
@@ -86,9 +80,9 @@ class UserController extends Controller
     public function action_update_form($post)
     {
         $data = [
-            'title' => 'Редактировать пользователя',
+            'title'  => 'Редактировать пользователя',
             'access' => User::get_access_all(),
-            'user' => User::findOrFail($post->id)
+            'user'   => User::findOrFail($post->id)
         ];
 
         return view('admin.users.update_form', $data);
@@ -109,8 +103,8 @@ class UserController extends Controller
             res(400, 'Введите имя');
 
         User::where('id', $post->id)->update([
-            'login' => $post->login,
-            'name' => $post->name,
+            'login'  => $post->login,
+            'name'   => $post->name,
             'access' => $post->access
         ]);
 
@@ -142,11 +136,11 @@ class UserController extends Controller
     public function section_access()
     {
         $data = [
-            'title' => 'Настройки доступа',
-            'users' => User::all(),
-            'components' => ['modal', 'sweetalert', 'serializejson'],
+            'title'         => 'Настройки доступа',
+            'users'         => User::all(),
+            'components'    => ['modal', 'sweetalert', 'serializejson'],
             'access_groups' => User::get_access_all(),
-            'breadcrumb' => [['name' => 'Настройки доступа']]
+            'breadcrumb'    => [['name' => 'Настройки доступа']]
         ];
 
         return view('admin.users.access', $data);
@@ -162,7 +156,7 @@ class UserController extends Controller
     public function action_update_access_group_form($post)
     {
         return view('admin.users.update_access_group_form', [
-            'title' => 'Редактировать группу доступа',
+            'title'  => 'Редактировать группу доступа',
             'access' => DB::table('users_access')->where('id', $post->id)->first()
         ]);
     }
@@ -174,7 +168,7 @@ class UserController extends Controller
         unset($post->name);
 
         DB::table('users_access')->insert([
-            'name' => $name,
+            'name'  => $name,
             'array' => json_encode(get_keys($post))
         ]);
 
@@ -189,7 +183,7 @@ class UserController extends Controller
         unset($post->name, $post->id);
 
         DB::table('users_access')->where('id', $id)->update([
-            'name' => $name,
+            'name'  => $name,
             'array' => json_encode(get_keys($post))
         ]);
 

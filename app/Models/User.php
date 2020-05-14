@@ -28,10 +28,7 @@ class User extends Model
 {
 
     public $timestamps = false;
-    /**
-     * @param Request $request
-     * @return bool
-     */
+
     public static function check_login($request)
     {
         $result = DB::table('users')
@@ -42,7 +39,7 @@ class User extends Model
         if ($result == null)
             return false;
 
-        $session = my_crypt($request->login . $request->password . $request->server('HTTP_USER_AGENT'));
+        $session = my_crypt($request->login . $request->password);
 
         setcookie('session', $session, time() + 3600);
 

@@ -18,19 +18,19 @@
             Авторизация
         </div>
 
-        <form action="<?= uri('admin/login') ?>" data-type="login">
+        <form action="{{ url('admin/login') }}" data-type="login">
 
             <input type="hidden" name="action" value="login">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="form-group">
-                <label for="login">Логин</label>
-                <input autofocus required id="login" class="form-control" name="login">
+                <label>Логин</label>
+                <input autofocus required class="form-control" name="login">
             </div>
 
             <div class="form-group">
-                <label for="password">Пароль</label>
-                <input required id="password" class="form-control" name="password" type="password">
+                <label>Пароль</label>
+                <input required class="form-control" name="password" type="password">
             </div>
 
             <div class="form-group" style="margin-bottom: 0;">
@@ -49,24 +49,26 @@
 <script src="{{ asset('js/custom.js') }}"></script>
 
 <script>
-    $('[data-type="login"]').on('submit', function (event) {
-        event.preventDefault();
+    $(document).on('submit', '[data-type="login"]', function (event) {
+        event.preventDefault()
 
-        var action = $(this).attr('action');
-        var data = $(this).serializeJSON();
+        let data = new FormData(this)
+        let action = $(this).attr('action')
 
         $.ajax({
             type: 'post',
             url: action,
             data: data,
+            processData: false,
+            contentType: false,
             success: function (answer) {
-                location.reload();
+                location.reload()
             },
             error: function (answer) {
-                errorHandler(answer);
+                errorHandler(answer)
             }
-        });
-    });
+        })
+    })
 </script>
 
 </body>

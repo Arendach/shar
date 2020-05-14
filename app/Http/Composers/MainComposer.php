@@ -10,6 +10,6 @@ class MainComposer
 {
     public function compose(View $view)
     {
-        return $view->with('categories', Category::withCount('products')->get());
+        return $view->with('categories', Category::withCount('products')->orderByDesc('sort')->get());
     }
 }

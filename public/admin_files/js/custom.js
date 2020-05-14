@@ -114,25 +114,24 @@ $(document).ready(function () {
     });
 
     $body.on('click', '[data-type="exit"]', function (event) {
-        event.preventDefault();
-
-        var token = $(this).data('token');
+        event.preventDefault()
+        let token = $(this).data('token')
 
         $.ajax({
             type: 'post',
-             url: url('admin/user'),
+             url: '/admin/user',
             data: {
                 action: 'exit',
                 _token: token
             },
             success: function (answer) {
-                window.location.reload();
+                window.location.reload()
             },
             error: function (answer) {
-                errorHandler(answer);
+                errorHandler(answer)
             }
         })
-    });
+    })
 
     var url = document.location.toString();
     if (url.match('#')) {

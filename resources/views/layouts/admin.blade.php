@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <script>
-        function url(p) {
+        window.url = function (p) {
             return '{{ env('APP_URL') }}/' + p;
         }
     </script>
@@ -68,7 +68,8 @@
                 <?php } ?>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ \App\Models\Feedback::where('accepted', 0)->count() ? 'text-danger' : '' }}" href="{{ url('/admin/feedback') }}">
+                    <a class="nav-link {{ \App\Models\Feedback::where('accepted', 0)->count() ? 'text-danger' : '' }}"
+                       href="{{ url('/admin/feedback') }}">
                         Перезвонить срочно
                     </a>
                 </li>
