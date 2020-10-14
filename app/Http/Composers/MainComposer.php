@@ -10,6 +10,10 @@ class MainComposer
 {
     public function compose(View $view)
     {
-        return $view->with('categories', Category::withCount('products')->orderByDesc('sort')->get());
+        $categories = \Cache::rememberForever('categoriesInMainComposer', function () {
+            return Category::withCount('products')->orderByDesc('sort')->get();
+        });
+
+        return $view->with(compact('categories'));
     }
 }

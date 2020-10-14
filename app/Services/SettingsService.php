@@ -18,7 +18,9 @@ class SettingsService
 
     private function boot(): void
     {
-        $result = Settings::all();
+        $result = \Cache::rememberForever('settings', function () {
+            return Settings::all();
+        });
 
         if ($result->count() > 0) {
             $temp = [];
@@ -27,10 +29,10 @@ class SettingsService
                     $temp[$item->section] = [];
 
                 $temp[$item->section][$item->name] = [
-                    'id' => $item->id,
-                    'value' => $item->value,
+                    'id'          => $item->id,
+                    'value'       => $item->value,
                     'description' => $item->description,
-                    'size' => $item->size
+                    'size'        => $item->size
                 ];
             }
 

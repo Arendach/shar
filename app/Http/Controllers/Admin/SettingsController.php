@@ -27,6 +27,8 @@ class SettingsController extends Controller
     {
         Settings::update_($post);
 
+        \Artisan::call('cache:clear');
+
         res(200, 'Данные успешно оновлено!');
     }
 
@@ -44,8 +46,12 @@ class SettingsController extends Controller
                 ->where('name', 'image')
                 ->update(['value' => "images/$name"]);
 
+            \Artisan::call('cache:clear');
+
             res(200, 'Фото успешно обновлено!');
         } else {
+            \Artisan::call('cache:clear');
+
             res(500, 'Не удалось загрузить изображение!');
         }
     }
