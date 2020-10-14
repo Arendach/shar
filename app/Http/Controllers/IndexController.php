@@ -3,20 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
+use Cache;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class IndexController extends Controller
 {
     public function section_main()
     {
-        $items = Category::withCount('products')->orderByDesc('sort')->get();
+        $items = Cache::rememberForever('mainPageItems', function () {
+            $items = Category::withCount('products')->orderByDesc('sort')->get();
 
-        $items->each(function (Category $category) {
-            $category->load(['products' => function (HasMany $builder) {
-                $builder->limit(settings('main.items_to_category'))
-                    ->orderByDesc('priority');
-            }]);
+            $items->each(function (Category $category) {
+                $category->load(['products' => function (HasMany $builder) {
+                    $builder->limit(settings('main.items_to_category'))
+                        ->orderByDesc('priority');
+                }]);
+            });
+
+            return $items;
         });
 
         $data = [

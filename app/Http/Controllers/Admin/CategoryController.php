@@ -80,6 +80,8 @@ class CategoryController extends Controller
 
         Category::findOrFail(request('id'))->update(request()->all());
 
+        \Artisan::call('cache:clear');
+
         return response()->json([
             'message' => 'Данные успешно оновлены!'
         ]);
@@ -101,6 +103,8 @@ class CategoryController extends Controller
 
         $category = Category::create(request()->all());
 
+        \Artisan::call('cache:clear');
+
         return response()->json([
             'id' => $category->id
         ]);
@@ -110,6 +114,8 @@ class CategoryController extends Controller
     {
         Category::findOrFail($post->id)
             ->delete();
+
+        \Artisan::call('cache:clear');
 
         res(200, 'Категория успешно переведена в архив!');
     }
@@ -123,6 +129,8 @@ class CategoryController extends Controller
         Product::withTrashed()
             ->where('category_id', $post->id)
             ->update(['deleted_at' => null]);
+
+        \Artisan::call('cache:clear');
 
         res(200, 'Категория успешно переведена из архива!');
     }

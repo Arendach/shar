@@ -78,6 +78,8 @@ class ProductController extends Controller
 
         $id = Product::create($post);
 
+        \Artisan::call('cache:clear');
+
         if ($id) {
             res(200, ['message' => 'Товар создан успешно!', 'id' => $id]);
         } else {
@@ -93,6 +95,8 @@ class ProductController extends Controller
 
         Product::update_main($post);
 
+        \Artisan::call('cache:clear');
+
         res(200, 'Товар успешно обновлен!');
     }
 
@@ -101,6 +105,8 @@ class ProductController extends Controller
         if (empty($post->meta_title)) res(400, 'Заполните заголовок товара!');
 
         Product::update_other($post);
+
+        \Artisan::call('cache:clear');
 
         res(200, 'Товар успешно обновлен!');
     }
@@ -126,8 +132,14 @@ class ProductController extends Controller
             $image->save(public_path("$path_min/$name"));
 
             Product::update_photo($post, "$path/$name", "$path_min/$name");
+
+            \Artisan::call('cache:clear');
+
             res(200, 'Фото успешно загружено!');
         } else {
+
+            \Artisan::call('cache:clear');
+
             res(500, 'Не удалось загрузить изображение!');
         }
     }
@@ -163,6 +175,8 @@ class ProductController extends Controller
 
         $uploads = $count - $err;
 
+        \Artisan::call('cache:clear');
+
         if ($err == $count) res(200, "Ни один файл не был загружен!");
         else res(200, "Загружено {$uploads} из $count");
     }
@@ -175,6 +189,8 @@ class ProductController extends Controller
         unlink(public_path($photo->getOriginal('path_min')));
 
         $photo->delete();
+
+        \Artisan::call('cache:clear');
 
         res(200, 'Фото успешно удалено');
     }
@@ -195,12 +211,16 @@ class ProductController extends Controller
             'description' => $post->description
         ]);
 
+        \Artisan::call('cache:clear');
+
         res(200, 'Описание успешно обновлено!');
     }
 
     public function action_delete($post)
     {
         Product::where('id', $post->id)->delete();
+
+        \Artisan::call('cache:clear');
 
         return response()->json([
             'message' => 'Товар видалений'
