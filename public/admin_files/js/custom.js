@@ -1,3 +1,25 @@
+$(document).on('click', '[data-type="ajax_request"]', function (event) {
+    event.preventDefault();
+
+    let uri = $(this).data('uri')
+    let data = $(this).data('post')
+    let action = $(this).data('action')
+
+    data = data + '&action=' + action
+
+    $.ajax({
+        type: 'post',
+        url: uri,
+        data: data,
+        success(answer) {
+            successHandler(answer)
+        },
+        error(answer) {
+            errorHandler(answer)
+        }
+    });
+});
+
 $(document).ready(function () {
     var $body = $('body');
 
@@ -91,35 +113,13 @@ $(document).ready(function () {
         });
     });
 
-    $body.on('click', '[data-type="ajax_request"]', function (event) {
-        event.preventDefault();
-
-        var uri = $(this).data('uri');
-        var data = $(this).data('post');
-        var action = $(this).data('action');
-
-        data = data + '&action=' + action;
-
-        $.ajax({
-            type: 'post',
-            url: uri,
-            data: data,
-            success: function (answer) {
-                successHandler(answer);
-            },
-            error: function (answer) {
-                errorHandler(answer);
-            }
-        });
-    });
-
     $body.on('click', '[data-type="exit"]', function (event) {
         event.preventDefault()
         let token = $(this).data('token')
 
         $.ajax({
             type: 'post',
-             url: '/admin/user',
+            url: '/admin/user',
             data: {
                 action: 'exit',
                 _token: token
