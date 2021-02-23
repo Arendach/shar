@@ -5,6 +5,7 @@
     @if(count($feedback) > 0)
         <table class="table-bordered table">
             <tr>
+                <th>ID</th>
                 <th>Имя</th>
                 <th>Телефон</th>
                 <th>Дата</th>
@@ -12,6 +13,7 @@
             </tr>
             @foreach($feedback as $item)
                 <tr>
+                    <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->phone }}</td>
                     <td>{{ $item->created_at->format('d.m.Y H:i') }}</td>
