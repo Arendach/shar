@@ -11,7 +11,7 @@ class FeedbackController extends Controller
     {
         $data = [
             'title' => 'Feedback',
-            'feedback' => Feedback::orderBy('accepted', 'asc')->orderBy('id', 'desc')->paginate(config('app.items')),
+            'feedback' => Feedback::orderBy('id', 'desc')->paginate(config('app.items')),
             'breadcrumb' => [['name' => 'Feedback']],
             'components' => ['sweetalert']
         ];
