@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Notifications\Telegram;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -27,9 +30,10 @@ class OrderController extends Controller
             ], 400);
         }
 
-        $id = Order::create($request);
+        $order = Order::create($request);
 
-        $this->sms_notification($id);
+        $this->sendTelegram($order);
+        $this->sms_notification($order->id);
 
         setcookie('cart_products', '', time() - 99999, '/');
 
@@ -44,4 +48,19 @@ class OrderController extends Controller
             send_sms(settings('sms.number'), settings('sms.template'), 'Оповещеие об заказе №' . $id);
         }
     }
+
+    private function sendTelegram($order)
+    {
+
+        try {
+            $telegram_users = explode(',', config('telegram.telegram_users'));
+            foreach ($telegram_users as $telegram_user_id) {
+                Notification::send('telegram', new Telegram($telegram_user_id, $order));
+            }
+        } catch (Exception $exception) {
+            $exception->getMessage();
+        }
+
+    }
+
 }

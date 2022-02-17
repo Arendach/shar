@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
+    protected $guarded = [];
     protected $table = 'order';
 
     public static function get_all()
@@ -44,11 +45,10 @@ class Order extends Model
             ]);
         }
 
-        DB::table('order')
-            ->where('id', '=', $id)
-            ->update(['sum' => $sum]);
+        $order = Order::findOrFail($id);
+        $order->update(['sum' => $sum]);
 
-        return $id;
+        return $order;
     }
 
     public function user()
