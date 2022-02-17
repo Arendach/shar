@@ -41,7 +41,6 @@ class Telegram extends Notification
         $url = "http://skyfire.name/shop/orders/details?id={$this->order->id}";
         return TelegramMessage::create()
             ->to($this->telegram_user_id)
-            ->content("Привiт! Нове замовлення!\nПоступило з сайту - {$current_site[2]}\n Сума заказу - {$this->order->sum}")
-            ->button('Переглянути замовлення', $url);
+            ->content("Привiт! Нове замовлення!\nПоступило з сайту - {$current_site[2]}\n Сума заказу - {$this->order->sum}");
     }
 }
