@@ -30,24 +30,25 @@
                 {!! settings('main.address') !!}
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 align-self-center">
-                {!! preg_replace('/\,/', '<br>', settings('main.phone')) !!} <br>
-                @if(!Agent::isDesktop())
-                    <a target="_blank" href="tel:+3800994170135">
-                        <i class="fa fa-phone"></i> +38 ‎(099) 417-01-35
-                    </a><br>
-                @else
-                    +38 ‎(099) 417-01-35 <br>
-                @endif
+                <a target="_blank" href="tel:{!! preg_replace('/\,/', '<br>', settings('main.phone')) !!}">
+                    <i class="fa fa-phone"></i> {!! preg_replace('/\,/', '<br>', settings('main.phone')) !!}
+                </a><br>
+                <a target="_blank" href="tel:+3800994170135">
+                    <i class="fa fa-phone"></i> +38 ‎(098) 417-01-35
+                </a><br>
+                <a target="_blank" href="tel:+3800994170135">
+                    <i class="fa fa-phone"></i> +38 ‎(099) 417-01-35
+                </a><br>
                 <a target="_blank" href="https://api.whatsapp.com/send?phone=380632479135">
                     <i class="fa fa-whatsapp"></i> WhatsApp
                 </a>
                 <br>
-                <a target="_blank" href="viber://chat?number=+380632479135" class="d-none d-sm-none d-md-none d-lg-block d-xl-block">
+                <a target="_blank" href="viber://chat?number=+380632479135" >
                     <i class="fa fa-whatsapp"></i> Viber
-                </a>
+                </a><br>
 
-                <a target="_blank" href="viber://add?number=+380632479135" class="d-block d-sm-block d-md-block d-lg-none d-xl-none">
-                    <i class="fa fa-whatsapp"></i> Viber
+                <a target="_blank" href="https://t.me/zakaz_sharov_vozdushno">
+                    <i class="fa fa-telegram"></i> Telegram
                 </a>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 align-self-center">
